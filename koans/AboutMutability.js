@@ -4,7 +4,7 @@ describe("About Mutability", function() {
     var aPerson = {firstname: "John", lastname: "Smith" };
     aPerson.firstname = "Alan";
 
-    expect(aPerson.firstname).toBe(FILL_ME_IN);
+    expect(aPerson.firstname).toBe('Alan');
   });
 
   it("should understand that constructed properties are public and mutable", function () {
@@ -16,7 +16,7 @@ describe("About Mutability", function() {
     var aPerson = new Person ("John", "Smith");
     aPerson.firstname = "Alan";
 
-    expect(aPerson.firstname).toBe(FILL_ME_IN);
+    expect(aPerson.firstname).toBe('Alan');
   });
 
   it("should expect prototype properties to be public and mutable", function () {
@@ -30,13 +30,13 @@ describe("About Mutability", function() {
     };
 
     var aPerson = new Person ("John", "Smith");
-    expect(aPerson.getFullName()).toBe(FILL_ME_IN);
+    expect(aPerson.getFullName()).toBe('John Smith');
 
     aPerson.getFullName = function () {
       return this.lastname + ", " + this.firstname;
     };
 
-    expect(aPerson.getFullName()).toBe(FILL_ME_IN);
+    expect(aPerson.getFullName()).toBe('Smith, John');
   });
 
   it("should know that variables inside a constructor and constructor args are private", function () {
@@ -50,19 +50,37 @@ describe("About Mutability", function() {
     }
     var aPerson = new Person ("John", "Smith");
 
+    //console.log(aPerson.firstname);
+    // creates a new Public property on the object, called firstname
     aPerson.firstname = "Penny";
+    //console.log(aPerson.firstname);
     aPerson.lastname = "Andrews";
-    aPerson.fullName = "Penny Andrews";
+    // does this overwrite the private fullName var on the object?
+    //console.log(aPerson.fullName);        //fullName is a Private var
+    //console.log(aPerson.getFullName());
+    aPerson.fullName = "Penny Andrews";   // add public var
+    //console.log(aPerson.fullName);        // return val of Public var
+    //console.log(aPerson.getFullName());   // result of closures
+    /*
+      Interesting, so firstname and lastname aren't private variables..
+      But, due to closures, getFirstName will ALWAYS return the value of firstname as it was originally passed into the Constructor
+      BECAUSE there is no way to alter (getFirstName).
+      Even though we add a new Public var of "firstname" to the object, 
+      the Private getFirstName() method looks at its local (Private) copy of the variable and returns that value. Not the value of the Public var firstName.
 
-    expect(aPerson.getFirstName()).toBe(FILL_ME_IN);
-    expect(aPerson.getLastName()).toBe(FILL_ME_IN);
-    expect(aPerson.getFullName()).toBe(FILL_ME_IN);
+    */
+
+    expect(aPerson.getFirstName()).toBe('John');
+    expect(aPerson.getLastName()).toBe('Smith');
+    expect(aPerson.getFullName()).toBe('John Smith');
 
     aPerson.getFullName = function () {
       return aPerson.lastname + ", " + aPerson.firstname;
     };
+    // added Public method getFullName,
+    // which overwrites the Private method of the same name.
 
-    expect(aPerson.getFullName()).toBe(FILL_ME_IN);
+    expect(aPerson.getFullName()).toBe('Andrews, Penny');
   });
 
 });

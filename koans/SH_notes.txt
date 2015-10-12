@@ -1,0 +1,58 @@
+SH_notes
+
+## 6 About Higher Order Functions
+### Filter, Map, Reduce
+###Higher Order Functions uses the _underscore library
+most of the exercises require you to become familiar with an underscore method
+- chain		 ( each command bewteen .chain and .value runs chained, 
+			   ie result is passed to the next command as input)
+- range
+- flatten
+- any		 ( like JS "some")	
+- all  		 ( like JS's "every")
+- forEach	 ( loops through each element in an array in order)
+
+## About Mutability
+### Constructor Functions
+Had a couple sticky points reguarding
+- Constructors, 
+- Private Properties, and 
+- Private Methods which form closures on initialization Parameters
+- especially when a Public variable gets added which uses the same name as a Closure Param variable
+- and when a Public method overwrites a Private method
+- and when a Public variable is added
+``` 	    //console.log(aPerson.firstname);
+    // creates a new Public property on the object, called firstname
+    aPerson.firstname = "Penny";
+    //console.log(aPerson.firstname);
+    aPerson.lastname = "Andrews";
+    // does this overwrite the private fullName var on the object?
+    //console.log(aPerson.fullName);        //fullName is a Private var
+    //console.log(aPerson.getFullName());
+    aPerson.fullName = "Penny Andrews";   // add public var
+    //console.log(aPerson.fullName);        // return val of Public var
+    //console.log(aPerson.getFullName());   // result of closures
+    /*
+      Interesting, so firstname and lastname aren't private variables..
+      But, due to closures, getFirstName will ALWAYS return the value of firstname as it was originally passed into the Constructor
+      BECAUSE there is no way to alter (getFirstName).
+      Even though we add a new Public var of "firstname" to the object, 
+      the Private getFirstName() method looks at its local (Private) copy of the variable and returns that value. Not the value of the Public var firstName.
+
+    */
+```
+## 8. About Crockford's inheritance improvement
+### (Part of file 7: About Inheritance)
+### See http://javascript.crockford.com/prototypal.html
+
+See aboutInheritance.JS file for my notes (QUESTIONS) about this
+
+## 9. About Applying What We Have Learnt..
+### Here, we actually write code.  
+- See my code. 
+- Also see my Comments.  
+- And See what mistakes I made..
+- See my Solutions, and what I learned along the way
+
+** Koan #51: Did NOT Get Chaining method to work.
+   			 Did get it to work with _.range, _.reduce, _.filter However

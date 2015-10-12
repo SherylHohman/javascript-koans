@@ -1,3 +1,20 @@
+## These Are MY (Sheryl Hohman) Solutions to the JavaScript Koans
+#### see master repo for the untouched files
+
+## I have added a NOTES file regarding some of the Koans as
+## koans/SH_notes.txt file.
+
+## there are also notes inside some of the koans files
+
+## thus far, #51 is solved withOut Chaining
+## #52, and #53 have not been attempted, but at least one of them
+## involves chaining, which I was unable to get properly working.
+
+-----------------------------------------------------------------
+###orig README.markdown file below
+-----------------------------------------------------------------
+
+
 # Javascript Koans - koans to learn Javascript (the good bits) #
 
 Based on Edgecase's fantastic 
